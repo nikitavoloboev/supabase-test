@@ -1,7 +1,18 @@
-from typing import Union
-from fastapi import FastAPI
+from typing import AsyncGenerator
+from fastapi import FastAPI, Depends, HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+
+from db import AsyncSessionLocal
+from models import User
 
 app = FastAPI()
+
+
+# Dependency: provides an AsyncSession to your path operations.
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    async with AsyncSessionLocal() as session:
+        yield session
 
 
 @app.get("/")
@@ -14,9 +25,15 @@ def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+# An example async route that queries the database.
+@app.get("/users")
+async def read_users(db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(User))
+    users = result.scalars().all()
+    return users
+
+
+# Other routes can similarly use `db` for type-safe DB operations.
 
 
 def main():

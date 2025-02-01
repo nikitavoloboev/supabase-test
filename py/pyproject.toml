@@ -4,7 +4,12 @@ version = "0.1.0"
 description = "uv test"
 readme = "readme.md"
 requires-python = ">=3.12"
-dependencies = ["fastapi[standard]>=0.115.8"]
+dependencies = [
+    "asyncpg>=0.30.0",
+    "fastapi[standard]>=0.115.8",
+    "sqlalchemy>=2.0.37",
+    "sqlalchemy2-stubs>=0.0.2a38",
+]
 
 [dependency-groups]
 dev = ["ruff>=0.9.4"]
