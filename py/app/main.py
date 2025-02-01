@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
 from app.db import AsyncSessionLocal
-from app.models import User
+from app.schema import User
 
 app = FastAPI()
 
