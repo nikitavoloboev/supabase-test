@@ -3,7 +3,7 @@ from app.db import Base
 
 
 class User(Base):
-    __tablename__ = "user"  # Use the same name as in your DB migration.
+    __tablename__ = "user"
 
     id = Column(String, primary_key=True, index=True)
     name = Column(String, nullable=False)
