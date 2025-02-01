@@ -1,8 +1,8 @@
 import asyncio
 import uuid
 
-from db import AsyncSessionLocal
-from models import User
+from app.db import AsyncSessionLocal
+from app.models import User
 
 
 async def create_user() -> User:

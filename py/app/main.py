@@ -1,10 +1,10 @@
 from typing import AsyncGenerator
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from db import AsyncSessionLocal
-from models import User
+from app.db import AsyncSessionLocal
+from app.models import User
 
 app = FastAPI()
 
